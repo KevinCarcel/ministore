@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<div class='container paddingTop'>
+    <h1>Register</h1>
+
+
+    {{ form_start(RegisterType) }}
+        {{ form_row(RegisterType.email) }}
+        {{ form_row(RegisterType.nom) }}
+        {{ form_row(RegisterType.prenom) }}
+        {{ form_row(RegisterType.numTel) }}
+        {{ form_row(RegisterType.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(RegisterType.numVoie) }}
+        {{ form_row(RegisterType.voie) }}
+        {{ form_row(RegisterType.ville) }}
+        {{ form_row(RegisterType.codePostal) }}
+        <br>
+        {{ form_row(RegisterType.livraisonFav) }}
+        <br>
+        {{ form_row(RegisterType.agreeTerms) }}
+
+        <button type="submit" class="btn btn-primary mt-4">Register</button>
+    {{ form_end(RegisterType) }}
+</div>
+{% endblock %}
+

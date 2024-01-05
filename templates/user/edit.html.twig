@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modification de l'utilisateur{% endblock %}
+
+{% block body %}
+
+<main class="paddingTop">
+  <div class="container">
+
+    <h2 class"mt-4">Modifier mon profil</h2>
+      {{form_start(UserEditType)}}
+      {{ form_row(UserEditType.nom) }}
+      {{ form_row(UserEditType.prenom) }}
+      {{ form_row(UserEditType.numTel) }}
+      {{ form_row(UserEditType.numVoie) }}
+      {{ form_row(UserEditType.voie) }}
+      {{ form_row(UserEditType.ville) }}
+      {{ form_row(UserEditType.codePostal) }}
+      <br>
+      {{form_end(UserEditType)}}
+</div>
+</main>
+{% endblock %}
