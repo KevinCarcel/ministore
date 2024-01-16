@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class='paddingTop'>
+<h1 class="text-center">Commande en cours</h1>
+
+<p class="text-center">Numéro de commande : {{ order.reference }}</p>
+<p class="text-center">Date de commande : {{ order.createdAt|date('d/m/Y') }}</p>
+
+<h2 class="text-center mt-5">Produits commandés :</h2>
+  {% for detail in orderDetails %}
+  <table class="table table-striped container">
+    <thead>
+    <tr>
+        <th scope="col">Produit</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ detail.getProduits().getNom() }}</td>
+        <td>{{ detail.getQuantity() }}</td>
+        <td>{{ detail.getPrix()/100 }} €</td>
+        <td>{{ detail.getQuantity()*detail.getPrix() /100 }} €</td>
+    </tr>
+    </tbody>*
+    {% endfor %}
+    </table>
+
+<h2 class="text-center mt-5">Choisissez votre mode de livraison :</h2>
+<form action="{{ path('home.index') }}" method="post">
+    <div class="d-flex mt-5 justify-content-evenly">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="deliveryMode" id="homeDelivery" value="home">
+        <label class="form-check-label" for="homeDelivery">
+        Livraison à domicile : <br><span class= 'text-primary'>{{ adresseLivraison1 }} <br> {{adresseLivraison2}} <br> {{ app.user.nom }} {{ app.user.prenom}}</span>
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="deliveryMode" id="relayDelivery" value="relay">
+        <label class="form-check-label" for="relayDelivery">
+            Livraison via Mondial Relay <br> 
+            <!-- HTML Element in which the Parcelshop Picker Widget is loaded -->
+            <div id="Zone_Widget"></div>
+
+            <!-- HTML element to display the parcelshop selected, for demo only. Should use hidden instead. -->
+            <input type="hidden" id="Target_Widget" />  
+            </div>
+        </label>
+    </div>
+    <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary mt-3">Valider</button>
+    </div>
+</form>
+</main>
+{% endblock %}
+

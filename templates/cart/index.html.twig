@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class='paddingTop'>
+    <div class="container">
+        <section class="row">
+            <div class="col-12">
+                <h1 class="text-center">Panier</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Produit</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">quantité</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for element in data %}
+                            <tr>
+                                <td><img  src="/uploads/photos/{{ element.produit.image }}" class="img-fluid rounded-start" style="max-width:100px" alt="photoProduit"></td>
+                                <td class="pt-5">{{ element.produit.nom }}</td>
+                                <td class="pt-5">{{ element.produit.prix /100 }} €</td>
+                                <td class="pt-5">{{ element.quantity }}</td>
+                                <td class="pt-5">{{ element.produit.prix /100 * element.quantity }} €</td>
+                                <td>
+                                    <a href='{{ path('cart_add' , {id: element.produit.id}) }}' class='btn btn-success mt-4'>+</a> 
+                                    <a href='{{ path('cart_remove' , {id: element.produit.id}) }}' class='btn btn-warning mt-4'>-</a>
+                                    <a href='{{ path('cart_delete' , {id: element.produit.id}) }}' class='btn btn-danger mt-4'>Supprimer</a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5">Votre panier est vide</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Total</td>
+                            <td>{{ total /100 }} €</td>
+                            <td><a href="{{ path('cart_empty') }}" class="btn btn-danger">Vider</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a href="{{path('app_orders_add')}}" class="btn btn-primary ms-5 me-5">Valider le panier</a> 
+                <a href="{{path('app_produit_index')}}" class="btn btn-primary ">Continuer mes achats</a>
+            </div>
+          
+        </div>
+    </main>
+{% endblock %}

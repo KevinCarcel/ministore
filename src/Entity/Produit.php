@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,8 +21,6 @@ class Produit
     #[Assert\NotBlank]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $type = null;
 
     #[ORM\Column]
     #[Assert\GreaterThanOrEqual(0)]
@@ -30,13 +30,25 @@ class Produit
     #[ORM\Column]
     #[Assert\Positive()]
     #[Assert\NotNull]
-    private ?int $quantite = null;
+    private ?int $stock = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column(type:'string')]
     private ?string $image = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $type = null;
+
+    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: OrdersDetails::class)]
+    private Collection $ordersDetails;
+
+    public function __construct()
+    {
+        $this->ordersDetails = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -55,18 +67,6 @@ class Produit
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): static
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getPrix(): ?float
     {
         return $this->prix;
@@ -79,14 +79,14 @@ class Produit
         return $this;
     }
 
-    public function getQuantite(): ?int
+    public function getStock(): ?int
     {
-        return $this->quantite;
+        return $this->stock;
     }
 
-    public function setQuantite(int $quantite): static
+    public function setStock(int $stock): static
     {
-        $this->quantite = $quantite;
+        $this->stock = $stock;
 
         return $this;
     }
@@ -111,6 +111,48 @@ class Produit
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrdersDetails>
+     */
+    public function getOrdersDetails(): Collection
+    {
+        return $this->ordersDetails;
+    }
+
+    public function addOrdersDetail(OrdersDetails $ordersDetail): static
+    {
+        if (!$this->ordersDetails->contains($ordersDetail)) {
+            $this->ordersDetails->add($ordersDetail);
+            $ordersDetail->setProduits($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdersDetail(OrdersDetails $ordersDetail): static
+    {
+        if ($this->ordersDetails->removeElement($ordersDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($ordersDetail->getProduits() === $this) {
+                $ordersDetail->setProduits(null);
+            }
+        }
 
         return $this;
     }

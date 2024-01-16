@@ -108,6 +108,11 @@
 
         </div>
     </div>
+    {% for message in app.flashes('message') %}
+    <div class='alert alert-warning mt-4'>
+        {{message}}
+    </div>
+    {% endfor %}
     <section id="billboard" class="position-relative overflow-hidden bg-light-blue">
       <div class="swiper main-swiper">
         <div class="swiper-wrapper">
@@ -117,7 +122,7 @@
                 <div class="col-md-6">
                   <div class="banner-content">
                     <h1 class="display-2 text-uppercase text-dark pb-5">Your Products Are Great.</h1>
-                    <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                    <a href="{{path("app_produit_index")}}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
                   </div>
                 </div>
                 <div class="col-md-5">
@@ -134,7 +139,7 @@
                 <div class="col-md-6">
                   <div class="banner-content">
                     <h1 class="display-2 text-uppercase text-dark pb-5">Technology Hack You Won't Get</h1>
-                    <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
+                    <a href="{{path("app_produit_index")}}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Product</a>
                   </div>
                 </div>
                 <div class="col-md-5">
@@ -222,7 +227,7 @@
           <div class="display-header d-flex justify-content-between pb-3">
             <h2 class="display-7 text-dark text-uppercase">Mobile Products</h2>
             <div class="btn-right">
-              <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+              <a href="{{path("app_produit_index")}}" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
             </div>
           </div>
           <div class="swiper product-swiper">
@@ -239,7 +244,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Iphone 10</a>
+                      <a href="{{path("app_produit_index")}}">Iphone 10</a>
                     </h3>
                     <span class="item-price text-primary">$980</span>
                   </div>
@@ -257,7 +262,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Iphone 11</a>
+                      <a href="{{path("app_produit_index")}}">Iphone 11</a>
                     </h3>
                     <span class="item-price text-primary">$1100</span>
                   </div>
@@ -275,7 +280,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Iphone 8</a>
+                      <a href="{{path("app_produit_index")}}">Iphone 8</a>
                     </h3>
                     <span class="item-price text-primary">$780</span>
                   </div>
@@ -293,7 +298,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Iphone 13</a>
+                      <a href="{{path("app_produit_index")}}">Iphone 13</a>
                     </h3>
                     <span class="item-price text-primary">$1500</span>
                   </div>
@@ -306,12 +311,12 @@
                   </div>
                   <div class="cart-concern position-absolute">
                     <div class="cart-button d-flex">
-                      <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                      <a href="{{path("app_produit_index")}}" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
                     </div>
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Iphone 12</a>
+                      <a href="{{path("app_produit_index")}}">Iphone 12</a>
                     </h3>
                     <span class="item-price text-primary">$1300</span>
                   </div>
@@ -329,7 +334,7 @@
           <div class="display-header d-flex justify-content-between pb-3">
             <h2 class="display-7 text-dark text-uppercase">Smart Watches</h2>
             <div class="btn-right">
-              <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+              <a href="{{path("app_produit_index")}}" class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
             </div>
           </div>
           <div class="swiper product-watch-swiper">
@@ -346,7 +351,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Pink watch</a>
+                      <a href="{{path("app_produit_index")}}">Pink watch</a>
                     </h3>
                     <span class="item-price text-primary">$870</span>
                   </div>
@@ -364,7 +369,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">Heavy watch</a>
+                      <a href="{{path("app_produit_index")}}">Heavy watch</a>
                     </h3>
                     <span class="item-price text-primary">$680</span>
                   </div>
@@ -382,7 +387,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">spotted watch</a>
+                      <a href="{{path("app_produit_index")}}">spotted watch</a>
                     </h3>
                     <span class="item-price text-primary">$750</span>
                   </div>
@@ -400,7 +405,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">black watch</a>
+                      <a href="{{path("app_produit_index")}}">black watch</a>
                     </h3>
                     <span class="item-price text-primary">$650</span>
                   </div>
@@ -418,7 +423,7 @@
                   </div>
                   <div class="card-detail d-flex justify-content-between pt-3">
                     <h3 class="card-title text-uppercase">
-                      <a href="#">black watch</a>
+                      <a href="{{path("app_produit_index")}}">black watch</a>
                     </h3>
                     <span class="item-price text-primary">$750</span>
                   </div>
@@ -436,7 +441,7 @@
           <div class="text-content offset-4 padding-medium">
             <h3>10% off</h3>
             <h2 class="display-2 pb-5 text-uppercase text-dark">New year sale</h2>
-            <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Sale</a>
+            <a href="{{path("app_produit_index")}}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop Sale</a>
           </div>
         </div>
         <div class="col-md-6 col-sm-12">
@@ -724,13 +729,13 @@
                   <h5 class="widget-title pb-2">Quick Links</h5>
                   <ul class="menu-list list-unstyled text-uppercase">
                     <li class="menu-item pb-2">
-                      <a href="#">Home</a>
+                      <a href="{{path("home.index")}}">Home</a>
                     </li>
                     <li class="menu-item pb-2">
                       <a href="#">About</a>
                     </li>
                     <li class="menu-item pb-2">
-                      <a href="#">Shop</a>
+                      <a href="{{path("app_produit_index")}}">Shop</a>
                     </li>
                     <li class="menu-item pb-2">
                       <a href="#">Blogs</a>

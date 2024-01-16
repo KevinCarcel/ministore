@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -7,6 +8,7 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" type="text/css" href="//unpkg.com/leaflet/dist/leaflet.css" />
             <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
             <link rel="stylesheet" type="text/css" href="/css/styles.css">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -17,6 +19,13 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <!-- JQuery required (>1.6.4) -->
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+            <!-- Leaflet dependency is not required since it is loaded by the plugin -->
+            <script src="//unpkg.com/leaflet/dist/leaflet.js"></script>
+             <!-- JS plugin for the Parcelshop Picker Widget MR using JQuery -->
+            <script src="//widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mondialrelay.parcelshoppicker.min.js"></script>
+            <script src="/js/mondialRelay.js" ></script>
             <script src="/js/modernizr.js"></script>
             <script src="/js/jquery-1.11.0.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
