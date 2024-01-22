@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class='paddingTop'>
+    <h1 class="text-center mb-5">Toutes mes commandes</h1>
+{% if ordersWithDetails %}
+  {% for orderWithDetails in ordersWithDetails %}
+  <!-- Button trigger modal -->
+  <div class="d-flex justify-content-center mb-4 border-bottom pb-2">
+  <h2>Commande #{{ orderWithDetails.order.id }}</h2>
+<button type="button" class="btn btn-primary ms-3 " data-bs-toggle="modal" data-bs-target="#modal{{orderWithDetails.order.id}}">
+ Voir le détail
+</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade text-info" id="modal{{orderWithDetails.order.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Numero de commande : {{orderWithDetails.order.reference}}</h1>
+      </div>
+      <div class="modal-body d-flex">
+      <p class="text-secondary pe-3">Date de commande : <br> {{ orderWithDetails.order.createdAt|date('d/m/Y') }}</p>
+      <div class="d-flex flex-column ps-5 border-start">
+        <h2>Adresse de livraison :</h2>
+        <p class="text-secondary">{{ orderWithDetails.order.deliveryAdress }}</p>
+        <hr>
+        <h2>Détails de la commande :</h2>
+        <table>
+    <thead>
+        <tr class="border-bottom text-secondary">
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set total = 0 %}
+        {% for detail in orderWithDetails.details %}
+            <tr>
+                <td>{{ detail.getProduits().getNom() }}</td>
+                <td>{{ detail.getQuantity() }}</td>
+                <td>{{ detail.getProduits().getPrix()/100 * detail.getQuantity() }} €</td>
+            </tr>
+            {% set total = total + (detail.getQuantity()*detail.getPrix() /100) %}
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr class="border-top text-secondary">
+            <td colspan="2">Total</td>
+            <td>{{ total }} €</td>
+        </tr>
+</table>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+{% else %}
+  <p>Vous n'avez pas encore passé de commande.</p>
+{% endif %}
+</main>
+{% endblock %}
+

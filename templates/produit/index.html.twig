@@ -33,13 +33,16 @@
         <p class="card-text">Stock disponible : {{ produit.stock}}</p>
 
         {% if produit.stock > 0 %}
-        <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+         <form action="{{ path('cart_add', {'id': produit.id}) }}" method="post">
+        <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+        <input type="number" name="quantity" min="1" max="{{ produit.stock }}" value="1" class="ms-4">
+        </form>
         {% else %}
         <button type="button" class="btn btn-danger" disabled>Produit indisponible</button>
         {% endif %}
 
                 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal{{produit.id}}">
+<button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{produit.id}}">
   Plus d'information
 </button>
 <!-- Modal -->
@@ -55,7 +58,10 @@
         <p>{{ produit.description }}</p>
         <p class="text-center text-secondary">Prix : {{ produit.prix /100 }} €</p>
         {% if produit.stock > 0 %}
-        <a href="{{ path('cart_add', {'id': produit.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+        <form action="{{ path('cart_add', {'id': produit.id}) }}" method="post">
+        <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+        <input type="number" name="quantity" min="1" max="{{ produit.stock }}" value="1" class="ms-4">
+        </form>
         {% else %}
         <button type="button" class="btn btn-danger " disabled>Produit indisponible</button>
         {% endif %}

@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class='paddingTop' data-nom="{{ app.user.nom }}" data-prenom="{{ app.user.prenom }}" data-adresse-livraison1="{{ adresseLivraison1 }}" data-code-postal="{{ codePostal }}" data-ville="{{ ville }}">
+<h1 class="text-center">Commande en cours</h1>
+
+<p class="text-center">Numéro de commande : {{ order.reference }}</p>
+<p class="text-center">Date de commande : {{ order.createdAt|date('d/m/Y') }}</p>
+
+<h2 class="text-center mt-5">Choisissez votre mode de livraison :</h2>
+<div class="d-flex justify-content-center">
+<form id="deliveryDetailsForm" action="{{path('app_orders_summary',{'orderId': order.id})}}" method="get">
+    Nom : <input type="text" id="name" name="name"/><br/>
+    Adresse : <input type="text" id="address" name="address"/><br/>
+    Code Postal : <input type="text" id="postalCode" name="postalCode"/><br/>
+    Ville : <input type="text" id="city" name="city"/><br/>
+    </div>
+    <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary mt-3">Valider</button>
+    </div>
+</form>
+<form action="{{path('app_orders_summary',{'orderId': order.id})}}" method="post">
+    <div class="d-flex mt-5 justify-content-evenly">
+    <div class="form-check">
+        <h4 class="text-center">Livraison à domicile</h4>
+        <input class="form-check-input" type="radio" name="deliveryMode" id="homeDelivery" value="home">
+        <label class="form-check-label" for="homeDelivery">
+        <span class= 'text-primary'>{{ adresseLivraison1 }} <br> {{adresseLivraison2}} <br> {{ app.user.nom }} {{ app.user.prenom}}</span>
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="deliveryMode" id="relayDelivery" value="relay">
+        <label class="form-check-label" for="relayDelivery">
+            Livraison via Mondial Relay <br> </label> 
+</form>
+            <!-- HTML Element in which the Parcelshop Picker Widget is loaded -->
+            <div id="Zone_Widget"></div>
+
+            <div style="padding:8px; overflow:auto;">
+      <div style="display:none ;background:#edffb2; border:solid 1px #a5f913; padding:5px; font-family:verdana; font-size:10px;">
+        <em>Cette zone n'est pas située dans le Widget mais bien dans la page appelante.</em><br/><br/>
+        <div style="display:none; vertical-align:top;">
+ 
+          <!-- La balise ayant pour id "TargetDisplay_Widget" a été paramétrée pour reçevoir 
+          l'ID du Point Relais sélectionné -->
+          Point Relais Selectionné : <form action="" method="get">
+ 
+		  <input type="text" id="TargetDisplay_Widget" name="TargetDisplay_Widget"/><br/>
+ 
+          <!-- Balise HTML avec id "Target_Widget", paramétrée pour reçevoir l'ID 
+          du Point Relais sélectionné -->
+          Hidden : <input type="text" id="Target_Widget" name="Target_Widget"/><br/>
+ 
+          <!--Balise HTML avec id "TargetDisplayInfoPR_Widget" paramétrée pour recevoir 
+          l'adresse du Point Relais sélectionné -->
+ 
+          InfosPR :  <span id="TargetDisplayInfoPR_Widget"></span>
+ 
+        </div>
+ 
+        <hr />
+ 
+        <div style="display:none;">
+          <!-- Balises HTML utilisées dans la fonction de CallBack pour reçevoir des données à afficher -->
+          <div style="font-weight:bold;text-decoration:underline;">Callback zone</div><br/> 
+          <div>data.ID = <span id="cb_ID"></span></div>
+          <div>data.Nom = <span id="cb_Nom"></span></div>
+          <div>data.Adresse = <span id="cb_Adresse"></span></div>
+          <div>data.CP = <span id="cb_CP"></span></div>
+          <div>data.Ville = <span id="cb_Ville"></span></div>
+          <div>data.Pays = <span id="cb_Pays"></span></div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div> 
+</form>
+    
+</main>
+{% endblock %}
+

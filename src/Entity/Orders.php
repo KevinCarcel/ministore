@@ -30,6 +30,9 @@ class Orders
     #[ORM\OneToMany(mappedBy: 'orders', targetEntity: OrdersDetails::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $ordersDetails;
 
+    #[ORM\Column(length: 255 , nullable: true)]
+    private ?string $deliveryAdress = null;
+
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
@@ -102,6 +105,18 @@ class Orders
                 $ordersDetail->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDeliveryAdress(): ?string
+    {
+        return $this->deliveryAdress;
+    }
+
+    public function setDeliveryAdress(?string $deliveryAdress): static
+    {
+        $this->deliveryAdress = $deliveryAdress;
 
         return $this;
     }

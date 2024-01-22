@@ -58,12 +58,12 @@ class OrdersController extends AbstractController
         $this->addFlash('message', 'commande créée avec succès'); 
         // Redirigez l'utilisateur vers la page de commande en cours
         // l'ID de la commande à cette page pour récupérer les détails de la commande
-        return $this->redirectToRoute('app_orders_summary', ['orderId' => $order->getId()]);
+        return $this->redirectToRoute('app_orders_delivery', ['orderId' => $order->getId()]);
 
     }
     
-  #[Route("/order-summary/{orderId}", name: "summary")]
-public function orderSummary($orderId, OrdersRepository $ordersRepository)
+  #[Route("/order-delivery/{orderId}", name: "delivery")]
+public function orderSummary($orderId, OrdersRepository $ordersRepository , Request $request, EntityManagerInterface $em)
 {
     $user = $this->getUser(); // Récupère l'utilisateur actuellement connecté
     $numVoie = $user->getNumVoie();
@@ -82,13 +82,83 @@ public function orderSummary($orderId, OrdersRepository $ordersRepository)
     // Récupérez les détails de la commande
     $orderDetails = $order->getOrdersDetails();
 
+    // Récupérez l'adresse de livraison de la requête
+    $name = $request->query->get('name');
+    $address = $request->query->get('address');
+    $postalCode = $request->query->get('postalCode');
+    $city = $request->query->get('city');
+    $deliveryAdress = $request->query->get('deliveryAdress');
+    
+    // Enregistrez les modifications dans la base de données
+    if ($name && $address && $postalCode && $city) {
+      $deliveryAdress = $name . ', ' . $address . ', ' . $postalCode . ', ' . $city;
+      $order->setDeliveryAdress($deliveryAdress);
+      $em->persist($order);
+      $em->flush();
+  }
+    
     // Passez les détails de la commande à la vue
-    return $this->render('orders/order_summary.html.twig', [
+    return $this->render('orders/order_delivery.html.twig', [
         'order' => $order,
         'orderDetails' => $orderDetails,
         'adresseLivraison1' => $adresseLivraison1,
-        'adresseLivraison2' => $adresseLivraison2
+        'adresseLivraison2' => $adresseLivraison2,
+        'codePostal' => $codePostal,
+        'ville' => $ville,
+        'deliveryAdress' => $deliveryAdress ?? null
     ]);
 }
+#[Route('/order-summary/{orderId}', name: 'summary' , methods: ['GET'])]
+   
+  public function showOrderDetail($orderId , OrdersRepository $ordersRepository , Request $request ,EntityManagerInterface $em): Response
+  {
+    // Récupérez la commande de la base de données
+    $order = $ordersRepository->find($orderId);
 
+    // Récupérez les détails de la commande
+    $orderDetails = $order->getOrdersDetails();
+
+    // Récupérez l'adresse de livraison de la requête
+    $name = $request->query->get('name');
+    $address = $request->query->get('address');
+    $postalCode = $request->query->get('postalCode');
+    $city = $request->query->get('city');
+    
+    // Enregistrez les modifications dans la base de données
+    if ($name && $address && $postalCode && $city) {
+      $deliveryAdress = $name . ', ' . $address . ', ' . $postalCode . ', ' . $city;
+      $order->setDeliveryAdress($deliveryAdress);
+      $em->persist($order);
+      $em->flush();
+
+    }
+
+    // Renvoyer la vue du récapitulatif de commande avec les informations de la commande
+    return $this->render('orders/order_summary.html.twig', [
+      'order' => $order,
+      'orderDetails' => $orderDetails,
+      'deliveryAdress' => $deliveryAdress ?? null
+    ]);
+  }
+
+  #[Route('/order-all', name: 'all')]
+public function allOrder( OrdersRepository $ordersRepository): Response
+  {
+    $user = $this->getUser(); // Récupère l'utilisateur actuellement connecté
+    $orders = $ordersRepository->findBy(['user' => $user], ['id' => 'DESC']);
+   
+    $ordersWithDetails = [];
+    foreach ($orders as $order) {
+        $details = $order->getOrdersDetails(); // Récupère les détails de la commande
+        $ordersWithDetails[] = [
+            'order' => $order,
+            'details' => $details
+        ];
+    }
+   
+    return $this->render('orders/order_all.html.twig', [
+      'ordersWithDetails' => $ordersWithDetails,
+
+    ]);
+  }
 }

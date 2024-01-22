@@ -3,8 +3,9 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/cart', name: 'cart_')] 
@@ -37,7 +38,7 @@ class CartController extends AbstractController
 
 
     #[Route('/add/{id}', name: 'add')]
-    public function add(Produit $produit, SessionInterface $session, int $id)
+    public function add(Produit $produit, SessionInterface $session, int $id , Request $request)
   {
     //on recupere l'id du produit
     $id=$produit->getId();
@@ -45,12 +46,14 @@ class CartController extends AbstractController
     //on recupere le panier existant
     $panier = $session->get('panier', []);
 
+     //on recupere la quantite du produit
+     $quantity = $request->request->get('quantity', 1);
     //on ajoute le produit au panier si il n'est pas deja dedans
     //sinon on augmente la quantité
     if(empty($panier[$id])){
-      $panier[$id]=1;
+      $panier[$id]= $quantity;
     }else{
-      $panier[$id]++;
+      $panier[$id]+=$quantity;
     }
 
 
