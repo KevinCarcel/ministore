@@ -19,16 +19,18 @@ class ProduitController extends AbstractController
     {
         $nom = $request->query->get('nom');
         $typeId = $request->query->get('type');
+        $order = $request->query->get('order');
+        
     if ($typeId && $nom) {
         $type = $typeRepository->find($typeId);
-        $produits = $produitRepository->findByTypeAndName($type, $nom);
+        $produits = $produitRepository->findByTypeAndName($type, $nom, $order);
     } elseif ($typeId) {
         $type = $typeRepository->find($typeId);
-        $produits = $produitRepository->findByType($type);
+        $produits = $produitRepository->findByType($type, $order);
     } elseif ($nom) {
-        $produits = $produitRepository->findByName($nom);
+        $produits = $produitRepository->findByName($nom, $order);
     } else {
-        $produits = $produitRepository->findAll();
+        $produits = $produitRepository->findAll($order);
     }
         $types = $typeRepository->findAll();
         return $this->render('produit/index.html.twig', [

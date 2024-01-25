@@ -14,6 +14,11 @@
               <option value="{{ type.id }}">{{ type }}</option>
             {% endfor %}
         </select>
+          <select name="order" class="form-control mb-2" style="max-width: 150px">
+            <option value="">Trier par prix</option>
+            <option value="asc">Croissant</option>
+            <option value="desc">Décroissant</option>
+          </select>
     <button class="btn btn-outline-secondary me-3" type="submit">Filtrer</button>
     <a href="{{ path('app_produit_index') }}" class="btn btn-outline-secondary">Réinitialiser</a>
 </form>
