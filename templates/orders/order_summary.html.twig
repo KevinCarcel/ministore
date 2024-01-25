@@ -37,4 +37,10 @@
     <p class="text-center">Destinataire : {{ app.user.nom }} {{ app.user.prenom}}</p>
     <p class="text-center">Coordonnée du destinataire : {{ order.deliveryAdress}}</p>
     </div>
-    {% endblock %}
+    
+
+    <div class="text-center">
+    <a href="{{path("home.index")}}"><button class="btn btn-primary mt-5">Valider</button></a>
+    </div>
+</main>
+{% endblock %}

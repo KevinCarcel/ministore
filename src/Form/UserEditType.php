@@ -29,7 +29,7 @@ class UserEditType extends AbstractType
                     'minLenght'=> '2',
                     'maxLenght'=> '50'
                     ],
-                    'label'=> 'surname',
+                    'label'=> 'Nom',
                     'label_attr'=> [
                         'class'=> 'form-label',
                         ],
@@ -44,7 +44,7 @@ class UserEditType extends AbstractType
                     'minLenght'=> '2',
                     'maxLenght'=> '50'
                     ],
-                    'label'=> 'Firstname',
+                    'label'=> 'Prénom',
                     'label_attr'=> [
                         'class'=> 'form-label',
                         ],
@@ -58,7 +58,7 @@ class UserEditType extends AbstractType
                     'minLenght'=>'6',
                     'maxLenght'=> '10'
                 ],
-                'label'=> 'Phone number',
+                'label'=> 'Numéro de téléphone',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -72,7 +72,7 @@ class UserEditType extends AbstractType
                     'minLenght'=>'1',
                     'maxLenght'=> '10'
                 ],
-                'label'=> 'adress number',
+                'label'=> 'Numéro de voie',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -86,7 +86,7 @@ class UserEditType extends AbstractType
                     'minLenght'=>'10',
                     'maxLenght'=> '100'
                 ],
-                'label'=> 'adress',
+                'label'=> 'Voie',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -101,7 +101,7 @@ class UserEditType extends AbstractType
                     'minLenght'=>'2',
                     'maxLenght'=> '50'
                 ],
-                'label'=> 'City',
+                'label'=> 'Ville',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -115,7 +115,7 @@ class UserEditType extends AbstractType
                     'minLenght'=>'2',
                     'maxLenght'=> '10'
                 ],
-                'label'=> 'Zip code',
+                'label'=> 'Code postal',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],

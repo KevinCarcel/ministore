@@ -46,8 +46,9 @@ class CartController extends AbstractController
     //on recupere le panier existant
     $panier = $session->get('panier', []);
 
-     //on recupere la quantite du produit
+     //on recupere la quantite du produit choisi par le user
      $quantity = $request->request->get('quantity', 1);
+     
     //on ajoute le produit au panier si il n'est pas deja dedans
     //sinon on augmente la quantité
     if(empty($panier[$id])){

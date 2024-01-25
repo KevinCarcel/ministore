@@ -17,11 +17,6 @@ class ProduitController extends AbstractController
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
     public function index(ProduitRepository $produitRepository, Request $request, TypeRepository $typeRepository): Response
     {
-        //verif si le user est connecté
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
-
         $nom = $request->query->get('nom');
         $typeId = $request->query->get('type');
     if ($typeId && $nom) {

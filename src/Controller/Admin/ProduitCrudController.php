@@ -29,7 +29,7 @@ class ProduitCrudController extends AbstractCrudController
             yield AssociationField::new('type')->setCrudController(TypeCrudController::class),
             yield TextField::new("description"),
             yield MoneyField::new("prix")->setCurrency('EUR'),
-            yield IntegerField::new("quantite"),
+            yield IntegerField::new("stock"),
             yield ImageField::new("image")
             ->setFormTypeOptions($pageName == Crud::PAGE_EDIT ? ['allow_delete' => false] : [])
             ->setBasePath('/uploads/photos')

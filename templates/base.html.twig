@@ -107,6 +107,15 @@
     </svg> 
         {% include "partials/_header.html.twig" %}
         {% endblock %}
-        {% block body %}{% endblock %}
+        {% block body %}
+        {% for message in app.flashes('error') %}
+          <div class="alert alert-danger">
+        {{ message }}
+          </div>
+        {% endfor %}
+        {% endblock %}
+        {% block footer %}
+        {% include "partials/_footer.html.twig" %}
+        {% endblock %}
     </body>
 </html>

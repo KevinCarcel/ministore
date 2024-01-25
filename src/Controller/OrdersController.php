@@ -21,8 +21,16 @@ class OrdersController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
+        // Vérifiez si un utilisateur est connecté
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Vérifiez si le panier est vide
         $panier = $session->get('panier', []);
 
+        // Si le panier est vide, redirigez l'utilisateur vers la page d'accueil
         if($panier === []){
             $this->addFlash('message', 'Votre panier est vide');
             return $this->redirectToRoute('home.index');
@@ -41,6 +49,9 @@ class OrdersController extends AbstractController
 
             //on va chercher le produit
             $produit = $produitRepository->find($item);
+
+            // On diminue le stock du produit de la quantité dans le panier
+            $produit->setStock($produit->getStock() - $quantity);
             
             $prix = $produit->getPrix();
             
@@ -54,6 +65,9 @@ class OrdersController extends AbstractController
         //On persiste et on flush
         $em->persist($order);
         $em->flush();
+
+        //On vide le panier
+        $session->remove('panier');
 
         $this->addFlash('message', 'commande créée avec succès'); 
         // Redirigez l'utilisateur vers la page de commande en cours

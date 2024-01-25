@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Logo;
 use App\Entity\Type;
+use App\Entity\Orders;
 use App\Entity\Produit;
+use App\Entity\OrdersDetails;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -52,6 +54,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Produit', 'fas fa-map-marker-alt', Produit::class);
         yield MenuItem::linkToCrud('Type', 'fas fa-map-marker-alt', Type::class);
         yield MenuItem::linkToCrud('Logo', 'fas fa-map-marker-alt', Logo::class);
+        yield MenuItem::linkToCrud('Orders', 'fas fa-map-marker-alt', Orders::class);
     }
 
     
