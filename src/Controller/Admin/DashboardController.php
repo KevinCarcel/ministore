@@ -19,10 +19,12 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-        $url = $routeBuilder->setController(ProduitCrudController::class)->generateUrl();
+        // Render the custom dashboard template
+         return $this->render('admin/dashboard.html.twig');
+        // $routeBuilder = $this->container->get(AdminUrlGenerator::class);
+        // $url = $routeBuilder->setController(ProduitCrudController::class)->generateUrl();
 
-        return $this->redirect($url);
+        // return $this->redirect($url);
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -49,13 +51,13 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'home.html.twig');
-        yield MenuItem::linkToCrud('Produit', 'fas fa-map-marker-alt', Produit::class);
-        yield MenuItem::linkToCrud('Type', 'fas fa-map-marker-alt', Type::class);
-        yield MenuItem::linkToCrud('Logo', 'fas fa-map-marker-alt', Logo::class);
-        yield MenuItem::linkToCrud('Orders', 'fas fa-map-marker-alt', Orders::class);
+        yield MenuItem::linkToDashboard('Dashboard', 'fas fa-home');
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-solide fa-backward', 'home.index');
+        yield MenuItem::linkToCrud('Produit', 'fas fa-solid fa-store', Produit::class);
+        yield MenuItem::linkToCrud('Type', 'fas fa-solid fa-list', Type::class);
+        yield MenuItem::linkToCrud('Logo', 'fas fa-solid fa-image', Logo::class);
+        yield MenuItem::linkToCrud('Orders', 'fas fa-solid fa-truck-fast', Orders::class);
+        yield MenuItem::linkToRoute('logout', 'fas fa-solid fa-sign-out-alt', 'app_logout');
     }
-
     
 }

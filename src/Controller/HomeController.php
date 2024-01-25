@@ -14,7 +14,6 @@
     public function index(LogoRepository $logoRepository):Response
     {
       $logo = $logoRepository->findOneBy([]);
-      $this->addFlash('success', 'Votre commande est effectuée');
       return $this->render("home.html.twig",['logo'=>$logo]);
     }
   }

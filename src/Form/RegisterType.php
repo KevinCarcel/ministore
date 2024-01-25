@@ -39,7 +39,7 @@ class RegisterType extends AbstractType
             ])
             // ->add('roles')
             ->add('plainPassword',PasswordType::class,[
-                'label'=>'Password',
+                'label'=>'Mot de passe',
                 'label_attr'=>[
                     'class'=> 'form-label'
                 ],
@@ -64,7 +64,7 @@ class RegisterType extends AbstractType
                     'minLenght'=> '2',
                     'maxLenght'=> '50'
                     ],
-                    'label'=> 'surname',
+                    'label'=> 'Nom',
                     'label_attr'=> [
                         'class'=> 'form-label',
                         ],
@@ -79,7 +79,7 @@ class RegisterType extends AbstractType
                     'minLenght'=> '2',
                     'maxLenght'=> '50'
                     ],
-                    'label'=> 'Firstname',
+                    'label'=> 'Prenom',
                     'label_attr'=> [
                         'class'=> 'form-label',
                         ],
@@ -93,7 +93,7 @@ class RegisterType extends AbstractType
                     'minLenght'=>'6',
                     'maxLenght'=> '10'
                 ],
-                'label'=> 'Phone number',
+                'label'=> 'Numéro de téléphone',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -107,7 +107,7 @@ class RegisterType extends AbstractType
                     'minLenght'=>'1',
                     'maxLenght'=> '10'
                 ],
-                'label'=> 'adress number',
+                'label'=> 'Numero de voie',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -121,7 +121,7 @@ class RegisterType extends AbstractType
                     'minLenght'=>'10',
                     'maxLenght'=> '100'
                 ],
-                'label'=> 'adress',
+                'label'=> 'Voie',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -136,7 +136,7 @@ class RegisterType extends AbstractType
                     'minLenght'=>'2',
                     'maxLenght'=> '50'
                 ],
-                'label'=> 'City',
+                'label'=> 'Ville',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -150,7 +150,7 @@ class RegisterType extends AbstractType
                     'minLenght'=>'2',
                     'maxLenght'=> '10'
                 ],
-                'label'=> 'Zip code',
+                'label'=> 'Code Postal',
                 'label_attr'=> [
                     'class'=>'form-label'
                 ],
@@ -159,7 +159,7 @@ class RegisterType extends AbstractType
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label'=>'RGPD',
+                'label'=>'RGPD (vous devez accepter les conditions générales d\'utilisation)',
                 'label_attr'=> [
                     'class'=> 'decale',
                     ],

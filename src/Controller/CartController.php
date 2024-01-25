@@ -54,7 +54,7 @@ class CartController extends AbstractController
     if(empty($panier[$id])){
       $panier[$id]= $quantity;
     }else{
-      $panier[$id]+=$quantity;
+      $panier[$id]=$quantity;
     }
 
 

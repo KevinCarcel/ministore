@@ -12,7 +12,7 @@
                             <th scope="col">Image</th>
                             <th scope="col">Produit</th>
                             <th scope="col">Prix</th>
-                            <th scope="col">quantité</th>
+                            <th scope="col">quantité <cite>(cliquez sur modifier si vous changez la quantité)</cite></th>
                             <th scope="col">Total</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -26,6 +26,7 @@
                                 <td class="pt-5">
                                 <form action="{{ path('cart_add', {'id': element.produit.id}) }}" method="post">
                                 <input type="number" name="quantity" min="1" max="{{ element.produit.stock }}" value="{{ element.quantity }}" class="ms-4">
+                                <input type="submit" value="Modifier" class="btn btn-primary ms-4">
                                 </form>
                                 </td>
                                 <td class="pt-5">{{ element.produit.prix /100 * element.quantity }} €</td>
