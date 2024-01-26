@@ -33,6 +33,16 @@
                 <li class="nav-item mt-3">
                       <a href="#" class="dropdown-item">Contact</a>
                     </li>
+                <li class="nav-item dropdown mt-3">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                  </a>
+              <ul class="dropdown-menu">
+              {% for navItem in nav_service.getNavItems() %}
+                <li><a href="{{ navItem.getLien() }}">{{ navItem.getNom() }}</a></li>
+              {% endfor %}
+              </ul>
+                </li>
                   </ul>
                 </li>
                 <li class="nav-item list-unstyled">

@@ -2,6 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         logo_service: '@App\Service\LogoService'
+        nav_service: '@App\Service\NavService'
         
 when@test:
     twig:

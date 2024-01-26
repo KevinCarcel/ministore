@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Nav;
 use App\Entity\Logo;
 use App\Entity\Type;
 use App\Entity\Orders;
@@ -57,6 +58,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Type', 'fas fa-solid fa-list', Type::class);
         yield MenuItem::linkToCrud('Logo', 'fas fa-solid fa-image', Logo::class);
         yield MenuItem::linkToCrud('Orders', 'fas fa-solid fa-truck-fast', Orders::class);
+        yield MenuItem::linkToCrud('Nav', 'fas fa-solid fa-list', Nav::class);
         yield MenuItem::linkToRoute('logout', 'fas fa-solid fa-sign-out-alt', 'app_logout');
     }
     
