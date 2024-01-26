@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Nav;
 use App\Entity\Logo;
 use App\Entity\Type;
+use App\Entity\User;
 use App\Entity\Orders;
 use App\Entity\Produit;
 use App\Entity\OrdersDetails;
@@ -56,6 +57,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-solide fa-backward', 'home.index');
         yield MenuItem::linkToCrud('Produit', 'fas fa-solid fa-store', Produit::class);
         yield MenuItem::linkToCrud('Type', 'fas fa-solid fa-list', Type::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-solid fa-user', User::class);
         yield MenuItem::linkToCrud('Logo', 'fas fa-solid fa-image', Logo::class);
         yield MenuItem::linkToCrud('Orders', 'fas fa-solid fa-truck-fast', Orders::class);
         yield MenuItem::linkToCrud('Nav', 'fas fa-solid fa-list', Nav::class);
